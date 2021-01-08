@@ -1,0 +1,31 @@
+---
+title: "Dash 2"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+```
+
+# Tab 1
+
+## Column {data-width=650}
+
+### Chart B
+
+```{r}
+```
+
+### Chart C
+
+```{r}
+```
+
+## Column {data-width=350}
+
+### Chart A
+
+```{r}
+```

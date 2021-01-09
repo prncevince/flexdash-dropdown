@@ -4,8 +4,8 @@ library(rvest)
 library(xml2)
 
 # html content files ----
-dir <- './public/'
-files <- list.files(dir, pattern = "*.html")
+dir <- './docs/'
+files <- list.files(dir, pattern = "^d.*.html")
 paths <- paste0(dir, files)
 
 # html dropdown partial ----
@@ -53,13 +53,13 @@ for (i in paths) {
   script_nodes <- doc_node %>% html_nodes(css = 'head script')
   i_filter <- script_nodes %>% xml_attr('id', default = '') %>% `==`("filter-dropdown")
   if (!T %in% i_filter) {
-    script_nodes %>% xml_add_sibling(filter_node)
+    script_nodes[1] %>% xml_add_sibling(filter_node, .where = 'before')
   }
   # add css
   style_nodes <- doc_node %>% html_nodes(css = 'head style')
   i_style <- style_nodes %>% xml_attr('id', default = '') %>% `==`("style-dropdown")
   if (!T %in% i_style) {
-    style_nodes %>% xml_add_sibling(style_node)
+    style_nodes[1] %>% xml_add_sibling(style_node, .where = 'before')
   }
   # add html dropdown
   if (! nav_right_nodes %>% xml_node('li') %>% as.character() %>% is.na()) {
